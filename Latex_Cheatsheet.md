@@ -1,5 +1,29 @@
 # General LaTeX Cheatsheet
 
+## Table of Contents
+1. [Document Structure and Sections](#1-document-structure-and-sections)
+   1. [Basic Document Structure](#11-basic-document-structure)
+   2. [Creating Sections and Subsections](#12-creating-sections-and-subsections)
+   3. [Table of Contents](#13-table-of-contents)
+2. [Text Formatting](#2-text-formatting)
+   1. [Basic Text Editing](#21-basic-text-editing)
+   2. [Paragraphs and New Lines](#22-paragraphs-and-new-lines)
+3. [Math Expression](#3-math-expression)
+   1. [Inline and Centered Math](#31-inline-and-centered-math)
+   2. [Defining Vectors and Matrices](#32-defining-vectors-and-matrices)
+4. [Creating Tables](#4-creating-tables)
+   1. [Basic Table Structure](#41-basic-table-structure)
+5. [Including Images and Figures](#5-including-images-and-figures)
+   1. [Referencing a Figure](#51-referencing-a-figure)
+   2. [Inserting a Figure](#52-inserting-a-figure)
+   3. [Setting Image Path](#53-setting-image-path)
+6. [List Environments](#6-list-environments)
+7. [Footnotes](#7-footnotes)
+8. [Customizing Document Layout](#8-customizing-document-layout)
+   1. [Change Font](#81-change-font)
+9. [Code Snippet](#9-code-snippet)
+10. [Setting PDF Metadata](#10-setting-pdf-metadata)
+
 ## 1. Document Structure and Sections
 
 ### 1.1 Basic Document Structure
@@ -309,11 +333,7 @@ public class HelloWorld {
 
 - Create custom syntax highlighting with `\lstdefinestyle{name}` and use it with `\lstset{style=name}`.
 
-
-
-
-
-## 10. Setting PDF Metadata with `\hypersetup`
+## 10. Setting PDF Metadata
 
 In LaTeX, you can use the `\hypersetup` command from the `hyperref` package to set metadata for the compiled PDF file. This metadata includes the title, author, subject, and other properties that can be viewed in PDF readers, which helps in organizing and finding documents, especially in digital libraries or personal archives.
 
