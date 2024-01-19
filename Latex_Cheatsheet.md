@@ -1,3 +1,5 @@
+[//]: # (Thanks to NaoPross for his template on HSR-Stud who encouraged me to write this doc)
+
 # General LaTeX Cheatsheet
 
 ## Table of Contents
@@ -8,6 +10,8 @@
 2. [Text Formatting](#2-text-formatting)
    1. [Basic Text Editing](#21-basic-text-editing)
    2. [Paragraphs and New Lines](#22-paragraphs-and-new-lines)
+   3. [Coloring Text and Elements](#23-coloring-text-and-elements)
+   4. [Changing Text Size and Spacing](#24-changing-text-size-and-spacing)
 3. [Math Expression](#3-math-expression)
    1. [Inline and Centered Math](#31-inline-and-centered-math)
    2. [Defining Vectors and Matrices](#32-defining-vectors-and-matrices)
@@ -23,6 +27,9 @@
    1. [Change Font](#81-change-font)
 9. [Code Snippet](#9-code-snippet)
 10. [Setting PDF Metadata](#10-setting-pdf-metadata)
+11. [Miscellaneous](#11-miscellaneous)
+    1. [Suggestion for Indentation](#111-suggestion-for-indentation)
+    2. [Preferred LaTeX Compiler](#112-preferred-latex-compiler)
 
 ## 1. Document Structure and Sections
 
@@ -110,6 +117,161 @@ Example:
 - **Removing Indentation**: To remove the indentation at the beginning of paragraphs and add a bit of vertical space between paragraphs, include `\usepackage{parskip}` in your document's preamble.
 
 - **Line Breaks**: Use `\\` or `\newline` for a new line within the same paragraph when necessary, though it's generally best to let LaTeX handle line breaks automatically.
+
+### 2.3 Coloring Text and Elements
+
+Coloring in LaTeX can enhance the visual appeal and clarity of your document. This can be achieved using the `xcolor` package, which provides a wide range of color options and functionalities.
+
+#### 2.3.1 Adding the xcolor Package
+
+First, include the `xcolor` package in your document's preamble:
+
+```latex
+\usepackage{xcolor}
+```
+
+You can specify options when loading `xcolor` to access more color models or predefined colors, like so:
+
+```latex
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+```
+
+#### 2.3.2 Basic Text Coloring
+
+To change the color of text:
+
+```latex
+\textcolor{color_name}{text}
+```
+
+For example:
+
+```latex
+\textcolor{blue}{This text will be blue.}
+\textcolor{red}{This text will be red.}
+```
+
+#### 2.3.3 Defining Custom Colors
+
+You can define your own colors:
+
+```latex
+\definecolor{mycolor}{RGB}{0,123,255} % RGB model
+\definecolor{anothercolor}{HTML}{00FF00} % HTML color codes
+```
+
+And use them like this:
+
+```latex
+\textcolor{mycolor}{Custom colored text.}
+```
+
+#### 2.3.4 Coloring Backgrounds
+
+To set the background color of a text block:
+
+```latex
+\colorbox{color_name}{text}
+```
+
+For a frame around the text with a background color:
+
+```latex
+\fcolorbox{frame_color}{background_color}{text}
+```
+
+#### 2.3.5 Advanced Coloring
+
+- **Paragraphs**: You can apply color to entire paragraphs or larger text blocks using the `\color` command at the beginning of the paragraph.
+
+- **Custom Environments**: Combine color commands with custom environments to colorize specific sections or elements consistently.
+
+- **Math Mode**: Colors can also be applied within math mode to highlight equations or parts of equations.
+
+### 2.4 Changing Text Size and Spacing
+
+In LaTeX, you have the flexibility to adjust the text size and spacing to meet your specific formatting needs. This section covers how to change the text size and control vertical spacing.
+
+#### 2.4.1 Changing Text Size
+
+LaTeX provides several commands for adjusting the text size. These commands affect the text size within their scope (enclosed within curly braces `{}` or within a LaTeX group/environment).
+
+Here are the most common text size commands, listed from smallest to largest (The font size in pt is only approximately and based on the default `article` class):
+
+```latex
+\tiny          % 5pt
+\scriptsize    % 7pt
+\footnotesize  % 8pt
+\small         % 9pt
+\normalsize    % 10pt
+\large         % 12pt
+\Large         % 14.4pt
+\LARGE         % 17.28pt
+\huge          % 20.74pt
+\Huge          % 24.88pt
+```
+
+Example of usage:
+
+```latex
+This is {\small small text} and this is {\Large large text}.
+```
+
+#### 2.4.2 Customizing Text Size
+
+For more specific text size requirements, you can use the `\fontsize{size}{baselineskip}` command, followed by `\selectfont`. 
+
+Example:
+
+```latex
+\fontsize{12pt}{14pt}\selectfont
+```
+
+#### 2.4.3 Adjusting Vertical Spacing
+
+Vertical spacing can be controlled using commands like `\vspace` and `\vfill`.
+
+- **`\vspace{length}`**: Adds vertical space of the specified length. Can be negative.
+- **`\vfill`**: Adds a variable amount of vertical space that expands as much as possible.
+
+Example:
+
+```latex
+Text before space.
+\vspace{10mm}
+Text after space.
+```
+
+#### 2.4.4 Customizing Line Spacing
+
+To adjust the line spacing for a portion of the document, use the `setspace` package and its commands:
+
+```latex
+\usepackage{setspace}
+\singlespacing % Single line spacing
+\onehalfspacing % One and a half line spacing
+\doublespacing % Double line spacing
+```
+
+For a specific section:
+
+```latex
+\begin{spacing}{2.5}
+Your text here.
+\end{spacing}
+```
+
+#### 2.4.5 Paragraph Spacing
+
+- **Customizing Paragraph Indent**: Use `\setlength{\parindent}{length}` to set the paragraph indent.
+- **Customizing Paragraph Skip**: Use `\setlength{\parskip}{length}` to set the space between paragraphs.
+
+Example:
+
+```latex
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+```
 
 ## 3. Math Expression
 
@@ -354,3 +516,94 @@ Then, use the `\hypersetup` command to set your PDF metadata:
     % other settings like colorlinks, linkcolor, etc.
 }
 ```
+
+## 11. Miscellaneous
+
+### 11.1 Suggestion for indentation
+
+LaTeX is very weird at first, because on one hand it feels like a programming language where indentation should be mandatory, but on the other hand it kinda isn't. Here I have some (opinionated) suggestions to make indentation in your LaTeX sources consistent.
+
+
+1. Use an indentation of 2 spaces. This is because you can get many nested expressions. You could go with 4, but keep in mind that you will need a wider screen.
+
+2. Indent only `\begin{...} \end{...}` blocks and open parenthesis `()` brackets `[]` or braces `{}`. Example:  
+    ```latex
+    \begin{table}
+      \begin{tabular}{l l}
+        \toprule
+        % ...
+      \end{tabular}
+      \caption{
+        A decently indented table.
+        \label{tab:another-table}
+      }
+    \end{table}
+    ```
+    Another example for maths:
+    ```latex
+    \[ % yes these count as brackets
+      y = \bar{y} \pm \sigma_y
+        \approx f(\bar{\vec{x}}) \pm \sqrt{\sum_{i=1}^m \left( % and these as well
+          \partial_{x_i} f(\bar{\vec{x}}) \sigma_{x_i}
+        \right)^2}
+    \]
+    ```
+
+3. The only exception is `\begin{document}` and `\end{document}`, which should not be indented. **This is the only exception**. The reasoning behind this is that (unless you use `\include`) everything will be be indented which is not very useful.
+
+4. Section headings etc. do not cause indentation. You should think of these macros as just putting there the title, not as a block.
+    ```latex
+    \section[VHSIC Hardware Description Language (VHDL)]{
+      VHDL: Very high-speed integrated circuits program
+      Hardware Description Language
+    }
+
+    \subsection{Basic syntax and identifiers}
+
+    In VHDL an identifier is a case insensitive string composed of \texttt{A-Z a-z 0-9 \_} that
+    \begin{itemize}
+      \item is not a keyword,
+      \item does not start with a number or \texttt{\_},
+      \item does not have two or more \texttt{\_} in a row.
+    \end{itemize}
+    ```
+
+5. Align tables to the `&`, if the content is short. For example
+    ```latex
+    \begin{table}
+      \centering
+      \begin{tabularx}{\linewidth}{>{\ttfamily}c l X}
+        \toprule
+        \textrm{Value} & Meaning & Usage \\
+        \midrule
+        U & Uninitialized  & In the simulator \\
+        X & Undefined      & Simulator sees a bus conflict \\
+        0 & Force to 0     & Low state of outputs \\
+        1 & Force to 1     & High state of outputs \\
+        Z & High Impedance & Three state ports \\
+        W & Weak Unknown   & Simulator sees weak a bus conflict \\
+        L & Weak Low       & Open source outputs with pull-down resistor \\
+        H & Weak High      & Open drain output with pull-up resistor \\
+        - & Don't care     & Allow minimization \\
+        \bottomrule
+      \end{tabularx}
+      \caption{
+        Possible values for \vhdl{std_logic} signals.
+        \label{tab:std-logic-1164-types}
+      }
+    \end{table}
+    ```
+
+### 11.2 Preferred LaTeX Compiler
+
+If you're currently using pdfLaTeX, consider switching to XeLaTeX or LuaLaTeX. These modern compilers provide several advantages, including:
+
+1. **Advanced Font Handling**: Easily use any font on your computer (with the `fontspec` package), including OpenType and TrueType, unlike the limited font options in pdfLaTeX.
+
+2. **Robust Unicode Support**: Ideal for multilingual documents and special characters, offering seamless support for Unicode, a feature where pdfLaTeX often falls short.
+
+3. **Modern Features and Flexibility**: LuaLaTeX integrates Lua scripting for advanced programmable capabilities within your documents.
+
+4. **Enhanced Micro-typography**: LuaLaTeX enhances the appearance and readability of your document with advanced typesetting features.
+
+5. **Reduced Package Conflicts**: Both compilers are aligned with current LaTeX development, ensuring better compatibility with new packages and fewer conflicts.
