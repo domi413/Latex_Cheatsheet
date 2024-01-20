@@ -590,19 +590,19 @@ Then, use the `\hypersetup` command to set your PDF metadata:
 
 ## 11. Managing Sources and Citations with Zotero
 
-### 11.1.1 Setup
+#### 11.1.1 Setup
 - **Install Zotero**: [Download](https://www.zotero.org/download/) and install.
 - **Install Better BibTeX (BBT)**: Add-on for Zotero. Automates BibTeX export. [Installation guide](https://retorque.re/zotero-better-bibtex/installation/).
 
-### 11.1.2 Exporting BibTeX File
+#### 11.1.2 Exporting BibTeX File
 - **Auto-Export with BBT**: Set up BBT to auto-export your Zotero library to a `.bib` file. Configure this in Zotero's BBT settings.
 
-### 11.1.3 LaTeX Document Setup
+#### 11.1.3 LaTeX Document Setup
 - **Bib File**: Place `.bib` file in LaTeX project directory.
 - **Bibliography Command**: Add `\bibliography{filename}` to your LaTeX file (replace `filename` with your `.bib` file name, without extension).
 - **Bibliography Style**: Define style with `\bibliographystyle{stylename}` (e.g., `plain`, `IEEEtran`).
 
-### 11.1.4 Citation in LaTeX
+#### 11.1.4 Citation in LaTeX
 - **Cite Command**: Use `\cite{key}` in the document, where `key` is the citation key from the `.bib` file.
   
 #### 11.1.5 Example Code Snippet
@@ -621,7 +621,7 @@ As discussed in \cite{Smith2020}, the results...
 \end{document}
 ```
 
-### 11.6 Compilation
+#### 11.1.6 Compilation
 - **Compile Sequence**: Run LaTeX, BibTeX, LaTeX, and LaTeX again to process citations and update the bibliography.
 
 ## 12. Miscellaneous
