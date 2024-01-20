@@ -9,9 +9,10 @@
    3. [Table of Contents](#13-table-of-contents)
 2. [Text Formatting](#2-text-formatting)
    1. [Basic Text Editing](#21-basic-text-editing)
-   2. [Paragraphs and New Lines](#22-paragraphs-and-new-lines)
-   3. [Coloring Text and Elements](#23-coloring-text-and-elements)
-   4. [Changing Text Size and Spacing](#24-changing-text-size-and-spacing)
+   2. [Handling Special Characters](#22-handling-special-characters)
+   3. [Paragraphs and New Lines](#23-paragraphs-and-new-lines)
+   4. [Coloring Text and Elements](#24-coloring-text-and-elements)
+   5. [Changing Text Size and Spacing](#25-changing-text-size-and-spacing)
 3. [Math Expression](#3-math-expression)
    1. [Inline and Centered Math](#31-inline-and-centered-math)
    2. [Defining Vectors and Matrices](#32-defining-vectors-and-matrices)
@@ -27,9 +28,11 @@
    1. [Change Font](#81-change-font)
 9. [Code Snippet](#9-code-snippet)
 10. [Setting PDF Metadata](#10-setting-pdf-metadata)
-11. [Miscellaneous](#11-miscellaneous)
-    1. [Suggestion for Indentation](#111-suggestion-for-indentation)
-    2. [Preferred LaTeX Compiler](#112-preferred-latex-compiler)
+11. [Managing Sources and Citations with Zotero](#11-managing-sources-and-citations-with-zotero)
+12. [Miscellaneous](#12-miscellaneous)
+    1. [Suggestion for Indentation](#121-suggestion-for-indentation)
+    2. [Preferred LaTeX Compiler](#122-preferred-latex-compiler)
+13. [Managing Complex LaTeX Projects with Multiple Files](#13-managing-complex-latex-projects-with-multiple-files)
 
 ## 1. Document Structure and Sections
 
@@ -87,6 +90,10 @@ Example:
 ...
 ```
 
+### 1.3.1 Clickable Table of Contents
+
+To create a clickable Table of Contents in LaTeX, use the `hyperref` package. Simply add `\usepackage{hyperref}` to your document's preamble, and then use `\tableofcontents` where you want the ToC to appear. The `hyperref` package automatically turns all entries in the ToC into clickable links.
+
 ## 2. Text Formatting
 
 ### 2.1 Basic Text Editing
@@ -96,7 +103,28 @@ Example:
 - Underline: `\underline{text}`
 - Double Underline: Use `\underline{\underline{text}}` or define a new command in the preamble with `\def\doubleunderline#1{\underline{\underline{#1}}}` and then use `\doubleunderline{text}`
 
-### 2.2 Paragraphs and New Lines
+### 2.2 Handling Special Characters
+
+LaTeX reserves several characters for formatting and commands, which cannot be used directly in the text. Here's how to include these special characters in your document:
+
+- **Backslash `\`**: Use `\textbackslash` for backslash, as it is used to start commands.
+- **Tilde `~`**: Use `\textasciitilde` or `\~{}` for a tilde, often used for non-breaking spaces.
+- **Dollar `$`**: Use `\$` for dollar signs, as `$` is used for entering math mode.
+- **Percent `%`**: Use `\%` for percent signs, as `%` is used for comments.
+- **Ampersand `&`**: Use `\&` for ampersands, as `&` is used for tabular alignment.
+- **Underscore `_`**: Use `\_` for underscores, as `_` is used for subscripts in math mode.
+- **Hash `#`**: Use `\#` for hash symbols, as `#` is used for macro parameters.
+- **Curly Braces `{}`**: Use `\{` and `\}` for curly braces, as `{}` are used for grouping.
+- **Caret `^`**: Use `\textasciicircum` or `\^{} ` for caret symbols, as `^` is used for superscripts in math mode.
+- **Pipe `|`**: Use `\textbar` for pipe symbols, as `|` can be used in tabular and math environments.
+
+Example usage in a LaTeX document:
+
+```latex
+This is a special character example: \% \$ \& \# \{ \} \_ \textasciitilde \textasciicircum \textbar
+```
+
+### 2.3 Paragraphs and New Lines
 
 - **Paragraphs**: Start a new paragraph by leaving an empty line in the LaTeX code. Avoid using `\\` for breaking paragraphs.
 
@@ -118,11 +146,11 @@ Example:
 
 - **Line Breaks**: Use `\\` or `\newline` for a new line within the same paragraph when necessary, though it's generally best to let LaTeX handle line breaks automatically.
 
-### 2.3 Coloring Text and Elements
+### 2.4 Coloring Text and Elements
 
 Coloring in LaTeX can enhance the visual appeal and clarity of your document. This can be achieved using the `xcolor` package, which provides a wide range of color options and functionalities.
 
-#### 2.3.1 Adding the xcolor Package
+#### 2.4.1 Adding the xcolor Package
 
 First, include the `xcolor` package in your document's preamble:
 
@@ -136,7 +164,7 @@ You can specify options when loading `xcolor` to access more color models or pre
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 ```
 
-#### 2.3.2 Basic Text Coloring
+#### 2.4.2 Basic Text Coloring
 
 To change the color of text:
 
@@ -151,7 +179,7 @@ For example:
 \textcolor{red}{This text will be red.}
 ```
 
-#### 2.3.3 Defining Custom Colors
+#### 2.4.3 Defining Custom Colors
 
 You can define your own colors:
 
@@ -166,7 +194,7 @@ And use them like this:
 \textcolor{mycolor}{Custom colored text.}
 ```
 
-#### 2.3.4 Coloring Backgrounds
+#### 2.4.4 Coloring Backgrounds
 
 To set the background color of a text block:
 
@@ -180,7 +208,7 @@ For a frame around the text with a background color:
 \fcolorbox{frame_color}{background_color}{text}
 ```
 
-#### 2.3.5 Advanced Coloring
+#### 2.4.5 Advanced Coloring
 
 - **Paragraphs**: You can apply color to entire paragraphs or larger text blocks using the `\color` command at the beginning of the paragraph.
 
@@ -188,11 +216,11 @@ For a frame around the text with a background color:
 
 - **Math Mode**: Colors can also be applied within math mode to highlight equations or parts of equations.
 
-### 2.4 Changing Text Size and Spacing
+### 2.5 Changing Text Size and Spacing
 
 In LaTeX, you have the flexibility to adjust the text size and spacing to meet your specific formatting needs. This section covers how to change the text size and control vertical spacing.
 
-#### 2.4.1 Changing Text Size
+#### 2.5.1 Changing Text Size
 
 LaTeX provides several commands for adjusting the text size. These commands affect the text size within their scope (enclosed within curly braces `{}` or within a LaTeX group/environment).
 
@@ -217,7 +245,7 @@ Example of usage:
 This is {\small small text} and this is {\Large large text}.
 ```
 
-#### 2.4.2 Customizing Text Size
+#### 2.5.2 Customizing Text Size
 
 For more specific text size requirements, you can use the `\fontsize{size}{baselineskip}` command, followed by `\selectfont`. 
 
@@ -227,7 +255,7 @@ Example:
 \fontsize{12pt}{14pt}\selectfont
 ```
 
-#### 2.4.3 Adjusting Vertical Spacing
+#### 2.5.3 Adjusting Vertical Spacing
 
 Vertical spacing can be controlled using commands like `\vspace` and `\vfill`.
 
@@ -242,7 +270,7 @@ Text before space.
 Text after space.
 ```
 
-#### 2.4.4 Customizing Line Spacing
+#### 2.5.4 Customizing Line Spacing
 
 To adjust the line spacing for a portion of the document, use the `setspace` package and its commands:
 
@@ -261,7 +289,7 @@ Your text here.
 \end{spacing}
 ```
 
-#### 2.4.5 Paragraph Spacing
+#### 2.5.5 Paragraph Spacing
 
 - **Customizing Paragraph Indent**: Use `\setlength{\parindent}{length}` to set the paragraph indent.
 - **Customizing Paragraph Skip**: Use `\setlength{\parskip}{length}` to set the space between paragraphs.
@@ -419,27 +447,70 @@ Use the `\ref` command within the text:
 
 ## 6. List Environments
 
-- Examples of list environments:
+LaTeX provides various list environments which can be customized to fit different needs. Here are the common list types and ways to customize them:
 
-```Latex
-% Unordered list
-\begin{itemize}
-    \item First item
-    \item Second item
-\end{itemize}
+### 6.1 Unordered List (Itemize)
+- **Basic Usage**:
+    ```latex
+    \begin{itemize}
+        \item First item
+        \item Second item
+    \end{itemize}
+    ```
+- **Changing Bullet Styles**:
+    Customize bullet points by redefining `\labelitemi` (first level), `\labelitemii` (second level), etc.
+    ```latex
+    \renewcommand{\labelitemi}{$\star$}
+    \renewcommand{\labelitemii}{$\cdot$}
+    ```
 
-% Ordered list
-\begin{enumerate}
-    \item First item
-    \item Second item
-\end{enumerate}
+### 6.2 Ordered List (Enumerate)
+- **Basic Usage**:
+    ```latex
+    \begin{enumerate}
+        \item First item
+        \item Second item
+    \end{enumerate}
+    ```
+- **Changing Numbering Style**:
+    Redefine `\labelenumi`, `\labelenumii`, etc., for different levels.
+    ```latex
+    \renewcommand{\labelenumi}{\Roman{enumi}.}
+    \renewcommand{\labelenumii}{(\alph{enumii})}
+    ```
 
-% Description list
-\begin{description}
-    \item[Term] Definition of the term.
-    \item[Concept] Explanation of the concept.
-\end{description}
-```
+### 6.3 Description List
+- **Basic Usage**:
+    ```latex
+    \begin{description}
+        \item[Term] Definition of the term.
+        \item[Concept] Explanation of the concept.
+    \end{description}
+    ```
+
+### 6.4 Customizing Spacing
+- Adjust spacing between items and paragraphs in lists using `\itemsep` and `\parsep`.
+    ```latex
+    \begin{itemize}
+        \setlength{\itemsep}{5pt}
+        \setlength{\parsep}{3pt}
+        \item Item 1
+        \item Item 2
+    \end{itemize}
+    ```
+
+### 6.5 Nested Lists
+- Lists can be nested within each other for more complex structures.
+    ```latex
+    \begin{enumerate}
+        \item First item
+            \begin{itemize}
+                \item Nested item
+                \item Another nested item
+            \end{itemize}
+        \item Second item
+    \end{enumerate}
+    ```
 
 ## 7. Footnotes
 
@@ -517,9 +588,45 @@ Then, use the `\hypersetup` command to set your PDF metadata:
 }
 ```
 
-## 11. Miscellaneous
+## 11. Managing Sources and Citations with Zotero
 
-### 11.1 Suggestion for indentation
+### 11.1.1 Setup
+- **Install Zotero**: [Download](https://www.zotero.org/download/) and install.
+- **Install Better BibTeX (BBT)**: Add-on for Zotero. Automates BibTeX export. [Installation guide](https://retorque.re/zotero-better-bibtex/installation/).
+
+### 11.1.2 Exporting BibTeX File
+- **Auto-Export with BBT**: Set up BBT to auto-export your Zotero library to a `.bib` file. Configure this in Zotero's BBT settings.
+
+### 11.1.3 LaTeX Document Setup
+- **Bib File**: Place `.bib` file in LaTeX project directory.
+- **Bibliography Command**: Add `\bibliography{filename}` to your LaTeX file (replace `filename` with your `.bib` file name, without extension).
+- **Bibliography Style**: Define style with `\bibliographystyle{stylename}` (e.g., `plain`, `IEEEtran`).
+
+### 11.1.4 Citation in LaTeX
+- **Cite Command**: Use `\cite{key}` in the document, where `key` is the citation key from the `.bib` file.
+  
+#### 11.1.5 Example Code Snippet
+```latex
+\documentclass{article}
+\usepackage{hyperref}
+\begin{document}
+
+\section{Introduction}
+As discussed in \cite{Smith2020}, the results...
+
+% (normally) at the end of the document insert:
+\bibliographystyle{IEEEtran}
+\bibliography{myreferences} % Assumes a file named 'myreferences.bib'
+
+\end{document}
+```
+
+### 11.6 Compilation
+- **Compile Sequence**: Run LaTeX, BibTeX, LaTeX, and LaTeX again to process citations and update the bibliography.
+
+## 12. Miscellaneous
+
+### 12.1 Suggestion for indentation
 
 LaTeX is very weird at first, because on one hand it feels like a programming language where indentation should be mandatory, but on the other hand it kinda isn't. Here I have some (opinionated) suggestions to make indentation in your LaTeX sources consistent.
 
@@ -594,7 +701,7 @@ LaTeX is very weird at first, because on one hand it feels like a programming la
     \end{table}
     ```
 
-### 11.2 Preferred LaTeX Compiler
+### 12.2 Preferred LaTeX Compiler
 
 If you're currently using pdfLaTeX, consider switching to XeLaTeX or LuaLaTeX. These modern compilers provide several advantages, including:
 
@@ -607,3 +714,83 @@ If you're currently using pdfLaTeX, consider switching to XeLaTeX or LuaLaTeX. T
 4. **Enhanced Micro-typography**: LuaLaTeX enhances the appearance and readability of your document with advanced typesetting features.
 
 5. **Reduced Package Conflicts**: Both compilers are aligned with current LaTeX development, ensuring better compatibility with new packages and fewer conflicts.
+
+## 13. Managing Complex LaTeX Projects with Multiple Files
+
+When working on large LaTeX projects, such as a thesis or a book, it's beneficial to split the content into multiple files for better organization and manageability. Here's a guide to setting up a structured folder system for such projects:
+
+#### 13.1.1 Folder Structure
+
+A well-organized folder structure is crucial for managing complex documents. Here's an example of an effective structure:
+
+```
+myproject/
+│
+├── main.tex            # Main document file
+│
+├── chapters/           # Folder for chapter files
+│   ├── chapter1.tex
+│   ├── chapter2.tex
+│   └── ...
+│
+├── images/             # Folder for images
+│   ├── img1.png
+│   ├── img2.jpg
+│   └── ...
+│
+├── styles/             # Folder for custom style files
+│   ├── mystyle.sty
+│   └── ...
+│
+├── bib/                # Folder for bibliography files
+│   ├── references.bib
+│   └── ...
+│
+└── appendices/         # Folder for appendices
+    ├── appendixA.tex
+    └── ...
+```
+
+#### 13.1.2 Main Document (main.tex)
+
+The `main.tex` file serves as the root document that integrates all other parts. Use `\input` or `\include` commands to add chapters and appendices.
+
+Example:
+
+```latex
+\documentclass{book}
+\usepackage{...} % Import necessary packages
+
+% Document settings go here
+
+\begin{document}
+
+\tableofcontents
+
+\include{chapters/chapter1}
+\include{chapters/chapter2}
+% Include other chapters as needed
+
+\appendix
+\include{appendices/appendixA}
+% Include other appendices as needed
+
+\bibliographystyle{plain}
+\bibliography{bib/references}
+
+\end{document}
+```
+
+#### 13.1.3 Best Practices for Multi-File Documents
+
+1. **Consistency**: Maintain consistent formatting across all files.
+2. **Modularity**: Keep each chapter or section in its own file for easy editing and organization.
+3. **Version Control**: Use a version control system like Git to manage changes, especially when collaborating.
+4. **Regular Backups**: Regularly backup your project folder.
+5. **Compilation**: Compile the `main.tex` file, not the individual chapter files.
+6. **Relative Paths**: Use relative paths for including files and images.
+7. **Comments and Documentation**: Comment your code for clarity, especially when working in teams.
+
+#### 13.1.4 Compilation
+
+With a multi-file structure, compilation remains straightforward. Compile `main.tex`, and LaTeX will automatically include the other files as specified.
