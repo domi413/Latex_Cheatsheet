@@ -1,3 +1,3 @@
-# LaTeX Cheatsheet README
+# LaTeX Cheatsheet
 
 simple LaTeX Cheatsheet...
