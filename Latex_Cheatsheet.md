@@ -781,6 +781,14 @@ Example:
 \end{document}
 ```
 
+#### Using `\input` vs. `\include` in LaTeX Documents
+
+In LaTeX, the commands `\input` and `\include` are used to incorporate external files into a main document, but they serve different purposes and have distinct behaviors that suit particular use cases. The `\input{file}` command is like a text copy-paste operation; it takes the content of `file.tex` and inserts it at the point where the command is used, with no added spacing or new pages. It is ideal for pulling in sections of text, preambles, or LaTeX configurations, allowing for modular document organization without affecting the document's flow.
+
+On the other hand, `\include{file}` is more suitable for adding whole chapters or sections that should begin on new pages in larger documents such as books or theses. This command inserts the content of `file.tex` starting on a new page, and importantly, it can be used with the `\includeonly{}` command. This feature can be leveraged during the drafting phase to compile only specific sections of the document, thereby speeding up the compilation process—a particularly handy tool when working with lengthy texts. 
+
+One must note that `\include` cannot be nested, and it automatically adds a page break, which would be undesirable for smaller inclusions like figures, tables, or code snippets. In summary, use `\input` for seamless, continuous inclusions, and reserve `\include` for structuring larger documents into separately compiled units, each beginning on a new page.
+
 #### 13.1.3 Best Practices for Multi-File Documents
 
 1. **Consistency**: Maintain consistent formatting across all files.
